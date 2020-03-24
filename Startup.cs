@@ -20,7 +20,7 @@ namespace src
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddCors();
+            // services.AddCors();
             services.AddMemoryCache();
             //Aqui adicionamos a injeção de dependência, pois senão daria conflito nas requisições.
             services.AddScoped<IPessoaService, PessoaService>();
@@ -35,12 +35,11 @@ namespace src
             app.UseDefaultFiles();
             app.UseRouting();
             app.UseHttpsRedirection();
-            app.UseCors( builder => builder.AllowAnyMethod()
-                                    .AllowAnyOrigin()
-                                    // .AllowCredentials()
-                                    // .AllowAnyHeader()
+            // app.UseCors( builder => builder.AllowAnyMethod()
+            //                         .AllowAnyOrigin()
+            //                         // .AllowCredentials()
+            //                         // .AllowAnyHeader()
 
-            );
             app.UseAuthorization();
             app.UseCors(option => option.AllowAnyOrigin());
             app.UseEndpoints(endpoints =>

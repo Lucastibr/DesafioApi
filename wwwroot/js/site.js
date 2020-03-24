@@ -1,13 +1,11 @@
-// Get
-fetch('Pessoa/BuscarTodos').then(
-    res => {
-        res.json().then(
+let dados = axios.get('Pessoa/BuscarTodos');
+dados.then(
             data => {
-                console.log(data);
-                if(data.length > 0)
+                console.log(data["data"]);
+                if(data["data"].length > 0)
                 {
-                    var temp = "";
-                    data.forEach((u) => {
+                   var temp = "";                 
+                    data["data"].forEach((u) => {
                         temp += "<tr>";
                         temp += "<td>"+u.id+"<td>";
                         temp += "<td>"+u.nome+"<td>";
@@ -15,30 +13,45 @@ fetch('Pessoa/BuscarTodos').then(
                         temp += "<td>"+u.dataNascimento+"<td>";
                         temp += "<td>"+u.uf+"<td>";
                     })
+
                     document.getElementById("data").innerHTML = temp;
                 }
-            })            
- })
+ })            
 
  //Post
 
-document.getElementById('cadastrar').addEventListener('submit',
-    submit)
+ var evento = function(event) {
+     event.preventDefault();
 
-    submit(event)
-    event.preventDefault();
+let nome = document.getElementById('nome').value;
+let cpf = document.getElementById('cpf').value;
+let dataNascimento = document.getElementById('dataNascimento').value;
+let uf = document.getElementById('uf').value;
 
-    let nome = document.getElementById('nome').value;
-    let cpf = document.getElementById('cpf').value;
-    let dataNascimento = document.getElementById('dataNascimento').value;
-    let uf = document.getElementById('uf').value;
+console.log(nome);
+console.log(cpf);
+console.log(dataNascimento);
+console.log(uf);
 
-    fetch('Pessoa', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: { "nome": nome, "cpf": cpf, "dataNascimento": dataNascimento, "uf": uf }
-    }).then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.log('erro', error));
+     
+axios.post('Pessoa', {  
+        'nome': nome,
+        'cpf': cpf,
+        'dataNascimento': dataNascimento,
+        'uf': uf
+    }
+)
+.then(response => {
+    console.log(response)
+})
+.catch(error => {
+    console.log(error.response)
+})
+
+ }
+
+var meuform = document.getElementById("postdata");
+meuform.addEventListener('submit', evento);
+
+
+

@@ -2,10 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using src.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System;
-using Microsoft.AspNetCore.Mvc;
 
 namespace src.Services
 {
@@ -16,7 +12,7 @@ namespace src.Services
        
         public async Task<Pessoa> BuscarPorId(int id) => pessoas.FirstOrDefault(c => c.Id == id);
 
-        public async Task<Pessoa> AdicionarPessoa([FromForm] Pessoa novaPessoa)
+        public async Task<Pessoa> AdicionarPessoa( Pessoa novaPessoa)
         {
             Pessoa pessoa = new Pessoa();
             novaPessoa.Id = pessoas.Max(c => c.Id) + 1;
