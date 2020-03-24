@@ -4,6 +4,8 @@ using System.Linq;
 using src.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace src.Services
 {
@@ -14,7 +16,7 @@ namespace src.Services
        
         public async Task<Pessoa> BuscarPorId(int id) => pessoas.FirstOrDefault(c => c.Id == id);
 
-        public async Task<Pessoa> AdicionarPessoa(Pessoa novaPessoa)
+        public async Task<Pessoa> AdicionarPessoa([FromForm] Pessoa novaPessoa)
         {
             Pessoa pessoa = new Pessoa();
             novaPessoa.Id = pessoas.Max(c => c.Id) + 1;
@@ -23,7 +25,7 @@ namespace src.Services
             return pessoa;
         }
 
-        public async Task<Pessoa> AtualizarPessoa(Pessoa AtualizarPessoa)
+        public async Task<Pessoa> AtualizarPessoa( Pessoa AtualizarPessoa)
         {
             Pessoa pessoa = pessoas.FirstOrDefault(p => p.Id == AtualizarPessoa.Id);
 
@@ -50,10 +52,12 @@ namespace src.Services
         }
 
         private static List<Pessoa> pessoas = new List<Pessoa>
+
         {
-            new Pessoa { Id = 1, Nome = "Lucas", CPF = 51113132132, DataNascimento = new System.DateTime(day: 12, month: 6, year: 1996), UF = UF.Acre},
-            new Pessoa {Id = 2, Nome = "Luciana", CPF = 67465645621, DataNascimento = new System.DateTime(day: 12, month: 5, year: 1986), UF= UF.Alagoas},
-            new Pessoa {Id = 3, Nome = "Luciano", CPF = 67125645621, DataNascimento = new System.DateTime(day: 30, month: 10, year: 1994), UF= UF.Tocantins}
+            
+            new Pessoa { Id = 1, Nome = "Lucas", CPF = "51113132132", DataNascimento = new System.DateTime(day: 12, month: 6, year: 1996), UF = UF.Acre},
+            new Pessoa {Id = 2, Nome = "Luciana", CPF = "67465645621", DataNascimento = new System.DateTime(day: 12, month: 5, year: 1986), UF= UF.Alagoas},
+            new Pessoa {Id = 3, Nome = "Luciano", CPF = "67125645621", DataNascimento = new System.DateTime(day: 30, month: 10, year: 1994), UF= UF.Tocantins}
             
         };
     }

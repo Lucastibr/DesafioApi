@@ -121,3 +121,6 @@ C:\Users\Lucas\Desktop\NewDesafioIterup\src\obj\Debug\netcoreapp3.1\src.RazorTar
 C:\Users\Lucas\Desktop\NewDesafioIterup\src\obj\Debug\netcoreapp3.1\src.csproj.CopyComplete
 C:\Users\Lucas\Desktop\NewDesafioIterup\src\obj\Debug\netcoreapp3.1\src.dll
 C:\Users\Lucas\Desktop\NewDesafioIterup\src\obj\Debug\netcoreapp3.1\src.pdb
+C:\Users\Lucas\Desktop\NewDesafioIterup\src\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Lucas\Desktop\NewDesafioIterup\src\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Lucas\Desktop\NewDesafioIterup\src\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

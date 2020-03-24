@@ -1,5 +1,5 @@
 // Get
-fetch('/Pessoa/BuscarTodos').then(
+fetch('Pessoa/BuscarTodos').then(
     res => {
         res.json().then(
             data => {
@@ -9,6 +9,7 @@ fetch('/Pessoa/BuscarTodos').then(
                     var temp = "";
                     data.forEach((u) => {
                         temp += "<tr>";
+                        temp += "<td>"+u.id+"<td>";
                         temp += "<td>"+u.nome+"<td>";
                         temp += "<td>"+u.cpf+"<td>";
                         temp += "<td>"+u.dataNascimento+"<td>";
@@ -21,25 +22,23 @@ fetch('/Pessoa/BuscarTodos').then(
 
  //Post
 
- document.getElementById('cadastrar').addEventListener('submit', postData) 
+document.getElementById('cadastrar').addEventListener('submit',
+    submit)
 
- function postData(event) {
-     event.PreventDefault();
+    submit(event)
+    event.preventDefault();
 
-let nome = document.getElementById('Nome').value;
-let cpf = document.getElementById('CPF').value;
-let dataNascimento = document.getElementById('DataNascimento').value;
-let uf = document.getElementById('UF').value;
+    let nome = document.getElementById('nome').value;
+    let cpf = document.getElementById('cpf').value;
+    let dataNascimento = document.getElementById('dataNascimento').value;
+    let uf = document.getElementById('uf').value;
 
-fetch('Pessoa', {
-    Method: 'POST',
-    // headers: new headers(),
-    body: JSON.stringify({"Nome": nome, "CPF": cpf, "DataNascimento": dataNascimento, "UF" : uf})
-}).then((res) => res.json())
-.then((data) => console.log(data))
-.catch((erro) => console.log('erro', erro));
-
- }
-
-
-
+    fetch('Pessoa', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: { "nome": nome, "cpf": cpf, "dataNascimento": dataNascimento, "uf": uf }
+    }).then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.log('erro', error));

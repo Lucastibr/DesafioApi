@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using src.Services;
+
 
 namespace src
 {
@@ -33,6 +35,12 @@ namespace src
             app.UseDefaultFiles();
             app.UseRouting();
             app.UseHttpsRedirection();
+            app.UseCors( builder => builder.AllowAnyMethod()
+                                    .AllowAnyOrigin()
+                                    // .AllowCredentials()
+                                    // .AllowAnyHeader()
+
+            );
             app.UseAuthorization();
             app.UseCors(option => option.AllowAnyOrigin());
             app.UseEndpoints(endpoints =>
