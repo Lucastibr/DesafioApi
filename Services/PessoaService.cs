@@ -13,12 +13,11 @@ namespace src.Services
         public async Task<Pessoa> BuscarPorId(int id) => pessoas.FirstOrDefault(c => c.Id == id);
 
         public async Task<Pessoa> AdicionarPessoa( Pessoa novaPessoa)
-        {
-            Pessoa pessoa = new Pessoa();
+        {           
             novaPessoa.Id = pessoas.Max(c => c.Id) + 1;
             pessoas.Add(novaPessoa);
 
-            return pessoa;
+            return novaPessoa;
         }
 
         public async Task<Pessoa> AtualizarPessoa( Pessoa AtualizarPessoa)
@@ -51,7 +50,7 @@ namespace src.Services
 
         {
             
-            new Pessoa { Id = 1, Nome = "Lucas", CPF = "51113132132", DataNascimento = new System.DateTime(day: 12, month: 6, year: 1996), UF = UF.Acre},
+            new Pessoa {Id = 1, Nome = "Lucas", CPF = "51113132132", DataNascimento = new System.DateTime(day: 12, month: 6, year: 1996), UF = UF.Acre},
             new Pessoa {Id = 2, Nome = "Luciana", CPF = "67465645621", DataNascimento = new System.DateTime(day: 12, month: 5, year: 1986), UF= UF.Alagoas},
             new Pessoa {Id = 3, Nome = "Luciano", CPF = "67125645621", DataNascimento = new System.DateTime(day: 30, month: 10, year: 1994), UF= UF.Tocantins}
             

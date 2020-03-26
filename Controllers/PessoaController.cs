@@ -21,13 +21,16 @@ namespace src.Controllers
 
         [HttpGet("{uf}")]
         public async Task<IActionResult> BuscarPorUF(UF uf) => Ok(await _pessoaService.BuscarPorUF(uf));
+
+        [HttpPost]
+        public async Task<IActionResult> AdicionarPessoa([FromBody]Pessoa adicionarPessoa) => Ok(await _pessoaService.AdicionarPessoa(adicionarPessoa));
+        
+        [HttpPut]
+        public async Task<IActionResult> AtualizarPessoa([FromBody]Pessoa atualizarPessoa) => Ok(await _pessoaService.AtualizarPessoa(atualizarPessoa));
       
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoverPessoa(int id) => Ok(await _pessoaService.RemoverPessoa(id));
 
-        [HttpPost]
-        public async Task<IActionResult> AdicionarPessoa([FromBody]Pessoa adicionarPessoa) => Ok(await _pessoaService.AdicionarPessoa(adicionarPessoa));
-        [HttpPut]
-        public async Task<IActionResult> AtualizarPessoa([FromBody]Pessoa atualizarPessoa) => Ok(await _pessoaService.AtualizarPessoa(atualizarPessoa));
+        
     }
 }
