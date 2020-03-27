@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using src.Models;
+using System;
+using src.DTO;
 
 namespace src.Services
 {
@@ -12,23 +14,28 @@ namespace src.Services
        
         public async Task<Pessoa> BuscarPorId(int id) => pessoas.FirstOrDefault(c => c.Id == id);
 
-        public async Task<Pessoa> AdicionarPessoa( Pessoa novaPessoa)
+        public async Task<Pessoa> AdicionarPessoa(AdicionarPessoaDTO novaPessoaDTO)
         {           
-            novaPessoa.Id = pessoas.Max(c => c.Id) + 1;
-            pessoas.Add(novaPessoa);
+            Pessoa novapessoa = new Pessoa();
+            novapessoa.Id = pessoas.Max(c => c.Id) + 1;
+            novapessoa.Nome = novaPessoaDTO.Nome;
+            novapessoa.CPF = novaPessoaDTO.CPF;
+            novapessoa.DataNascimento = novaPessoaDTO.DataNascimento;
+            novapessoa.UF = novaPessoaDTO.UF;
+            pessoas.Add(novapessoa);
 
-            return novaPessoa;
+            return novapessoa;
         }
 
-        public async Task<Pessoa> AtualizarPessoa( Pessoa AtualizarPessoa)
+        public async Task<Pessoa> AtualizarPessoa(AtualizarPessoaDTO AtualizarPessoa)
         {
             Pessoa pessoa = pessoas.FirstOrDefault(p => p.Id == AtualizarPessoa.Id);
 
-            pessoa.Nome = AtualizarPessoa.Nome;
-            pessoa.CPF = AtualizarPessoa.CPF;
-            pessoa.DataNascimento = AtualizarPessoa.DataNascimento;
-            pessoa.UF = AtualizarPessoa.UF;
-
+            //Null Propagation Operator
+            pessoa.Nome = AtualizarPessoa.Nome ?? pessoa.Nome;
+            pessoa.CPF = AtualizarPessoa.CPF ?? pessoa.CPF;
+            pessoa.DataNascimento = AtualizarPessoa.DataNascimento ?? pessoa.DataNascimento;
+            pessoa.UF = AtualizarPessoa.UF ?? pessoa.UF;
             return pessoa;
         }
 

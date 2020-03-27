@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using src.Models;
 using src.Services;
+using src.DTO;
 
 namespace src.Controllers
 {
@@ -23,10 +24,14 @@ namespace src.Controllers
         public async Task<IActionResult> BuscarPorUF(UF uf) => Ok(await _pessoaService.BuscarPorUF(uf));
 
         [HttpPost]
-        public async Task<IActionResult> AdicionarPessoa([FromBody]Pessoa adicionarPessoa) => Ok(await _pessoaService.AdicionarPessoa(adicionarPessoa));
+        public async Task<IActionResult> AdicionarPessoa([FromBody]AdicionarPessoaDTO adicionarPessoa) => Ok(await _pessoaService.AdicionarPessoa(adicionarPessoa));
         
-        [HttpPut]
-        public async Task<IActionResult> AtualizarPessoa([FromBody]Pessoa atualizarPessoa) => Ok(await _pessoaService.AtualizarPessoa(atualizarPessoa));
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarPessoa(int id,[FromBody]AtualizarPessoaDTO atualizarPessoa)
+        {
+            atualizarPessoa.Id = id;
+            return Ok(await _pessoaService.AtualizarPessoa(atualizarPessoa));
+        }
       
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoverPessoa(int id) => Ok(await _pessoaService.RemoverPessoa(id));

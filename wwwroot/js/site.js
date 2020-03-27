@@ -13,22 +13,17 @@ dados.then(
                         temp += "<td>"+u.cpf+"<td>";
                         temp += "<td>"+u.dataNascimento+"<td>";
                         temp += "<td>"+u.uf+"<td>";
-                        
+                        temp += "<td><button id='btEditar' class='btn btn-info' input type='submit' data-toggle='modal' data-target='#mymodal'>Editar</button><td>";
+                        temp += "<td><button id='btExcluir' class='btn btn-danger' type='button' onclick='excluirPessoa("+ u.id +")'>Excluir</button><td>";                       
                     })
 
-                }              
-                // data["data"].forEach(p => {
-                //     p = p.id;
-                //     p.value;
-                //    console.log(p);
-                // });         
+                }             
 
-                    document.getElementById("data").innerHTML = temp;             
- })            
+                    document.getElementById("data").innerHTML = temp;                              
+ })     
 
- //Post
-
- var evento = function(event) {
+//Post
+let evento = function(event) {
     event.preventDefault();
 
 let nome = document.getElementById('nome').value;
@@ -45,38 +40,54 @@ axios.post('Pessoa', {
 )
 .then(response => {
     console.log(response)
+    location.reload ? location.reload() : location = location;
 })
 .catch(error => {
     console.log(error.response)
 })
 
  }
-
-var meuform = document.getElementById("postdata");
+let meuform = document.getElementById("postdata");
 meuform.addEventListener('submit', evento);
 
-
 //Put
+let editarPessoa = function(event) { 
+    event.preventDefault();
 
-// let up = (teste) => {
-//     teste.preventDefault();
+let nomeupdate = document.getElementById('nomeupdate').value;
+let cpfupdate = document.getElementById('cpfupdate').value;
+let dataupdate = new Date(document.getElementById('dataupdate').value);
+let ufupdate = parseInt(document.getElementById('ufupdate').value);
 
-//     let nomeupdate = document.getElementById('nomeupdate').value;
-//     let cpfupdate = document.getElementById('cpfupdate').value;
-//     let dataNascimentoupdate = new Date(document.getElementById('dataupdate').value);
-//     let ufupdate = parseInt(document.getElementById('ufupdate').value);
+    const url = 'Pessoa/'
+    axios.put(url, {
+        'nome' : nomeupdate,
+        'cpf' : cpfupdate,
+        'dataNascimento' : dataupdate,
+        'uf' : ufupdate
+    })
+    .then(res => {
+        console.log(res);
+    })
+    .catch(error => {
+        console.log(error)
+    }) 
+}
 
-//     axios.put('Pessoa', {
-//         'data.nome' : nomeupdate,
-//         'data.cpf' : cpfupdate,
-//         'data.dataNascimento' : dataNascimentoupdate,
-//         'data.uf' : ufupdate
-//     })
-//     .then(res => {
-//         console.log(res)
-//     })
-//     .catch(error => {
-//         console.log(error);
-//     })
-// }
+window.onload = function() {
+	let form = document.getElementById("mymodal");
+	form.addEventListener('submit', editarPessoa);
+};
 
+//Delete
+function excluirPessoa(id) {
+	const url = 'Pessoa/'+id
+    axios.delete(url)
+	.then(res => {
+        console.log(res)
+        location.reload ? location.reload() : location = location;
+    })
+    .catch(error => {
+        console.log(error)
+    });
+}
